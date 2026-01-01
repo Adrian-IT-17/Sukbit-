@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUKBIT - Lightweight, Functional and Versatile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f0eb;
+            color: #3d3d3d;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #a08b75 0%, #8b7355 100%);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 3px;
+            font-family: 'Montserrat', serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .nav-icons span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-icons span:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 70vh;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23d4c4b0" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(160,139,117,0.3), rgba(139,115,85,0.5));
+        }
+
+        .hero-bags {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            padding: 80px 40px 0;
+        }
+
+        .bag-item {
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(135deg, #8b7355 0%, #6b5a45 100%);
+            border-radius: 0 0 100px 100px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .bag-item:nth-child(2) {
+            background: linear-gradient(135deg, #a08b75 0%, #8b7355 100%);
+            margin-top: 40px;
+        }
+
+        .bag-item:nth-child(3) {
+            background: linear-gradient(135deg, #6b5a45 0%, #5a4a35 100%);
+            margin-top: 20px;
+        }
+
+        .bag-item:nth-child(4) {
+            background: linear-gradient(135deg, #4a3a25 0%, #3a2a15 100%);
+            margin-top: 50px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            margin-top: 250px;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 120px;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            line-height: 1;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Font Info Section */
+        .font-info {
+            background: #ebe5df;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .font-info h2 {
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #5a4a35;
+        }
+
+        .font-info p {
+            font-size: 16px;
+            color: #6b5a45;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Products Grid Section */
+        .products-section {
+            padding: 80px 40px;
+            background: #d4c4b0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #c8d8e8 0%, #a8c8d8 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: #ebe5df;
+            padding: 80px 40px;
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            color: #5a4a35;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #5a4a35;
+        }
+
+        .feature-description {
+            text-align: center;
+            font-size: 16px;
+            color: #6b5a45;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Categories Section */
+        .categories-section {
+            display: flex;
+            padding: 80px 40px;
+            background: #d4c4b0;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .categories-sidebar {
+            min-width: 200px;
+        }
+
+        .categories-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: #5a4a35;
+            margin-bottom: 20px;
+        }
+
+        .categories-list {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .category-text {
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #5a4a35;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        .category-arrow {
+            font-size: 40px;
+            color: #5a4a35;
+        }
+
+        .categories-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .category-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #c8d8e8 0%, #a8c8d8 100%);
+            border: 8px solid #8b7355;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+        }
+
+        /* Customization Section */
+        .customization-section {
+            position: relative;
+            height: 500px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500"><rect fill="%23a08b75" width="1200" height="500"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .customization-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .customization-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .customization-content h2 {
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .customization-content p {
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .btn-customize {
+            background: #fff;
+            color: #5a4a35;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-customize:hover {
+            background: #ebe5df;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 80px 40px;
+            background: #ebe5df;
+        }
+
+        .reviews-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 60px;
+            color: #5a4a35;
+        }
+
+        .reviews-carousel {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .carousel-arrow {
+            font-size: 60px;
+            color: #8b7355;
+            cursor: pointer;
+            transition: color 0.2s;
+            user-select: none;
+        }
+
+        .carousel-arrow:hover {
+            color: #5a4a35;
+        }
+
+        .review-card {
+            flex: 1;
+            background: #8b7355;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            color: #fff;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .review-avatar {
+            width: 80px;
+            height: 80px;
+            background: #ebe5df;
+            border-radius: 50%;
+            margin-bottom: 25px;
+        }
+
+        .review-name {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #3d3d3d;
+            max-width: 500px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #a08b75;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #5a4a35;
+        }
+
+        /* Instagram Section */
+        .instagram-section {
+            padding: 80px 40px;
+            background: #d4c4b0;
+            text-align: center;
+        }
+
+        .instagram-title {
+            font-size: 42px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            color: #5a4a35;
+        }
+
+        .instagram-handle {
+            font-size: 18px;
+            color: #6b5a45;
+            margin-bottom: 50px;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .instagram-post {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #a08b75 0%, #8b7355 100%);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .instagram-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instagram-post:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #5a4a35;
+            color: #d4c4b0;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-logo {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo-text {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 3px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: #d4c4b0;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-section p {
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            background: #6b5a45;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #a08b75;
+        }
+
+        .newsletter-form button {
+            padding: 10px 20px;
+            background: #a08b75;
+            color: #fff;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #8b7355;
+        }
+
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 60px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .categories-section {
+                flex-direction: column;
+            }
+            
+            .categories-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .instagram-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">SUKBIT</div>
+            <ul class="nav-links">
+                <li><a href="#">SHOP NOW</a></li>
+                <li><a href="#">MY SUKBIT</a></li>
+                <li><a href="#">MORE INFO</a></li>
+            </ul>
+            <div class="nav-icons">
+                <span>🔍</span>
+                <span>👤</span>
+                <span>🛒</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bags">
+            <div class="bag-item">🧺</div>
+            <div class="bag-item">👜</div>
+            <div class="bag-item">🎒</div>
+            <div class="bag-item">👛</div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-tagline">Lightweight, Functional and Versatile</p>
+            <h1 class="hero-title">SUKBIT</h1>
+        </div>
+    </section>
+
+    <!-- Font Info Section -->
+    <section class="font-info">
+        <h2>SUKBIT (ITC Benguiat Condensed)</h2>
+        <p>Description (Montserrat)</p>
+    </section>
+
+    <!-- Products Grid Section -->
+    <section class="products-section">
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🧺</div>
+                <h3 class="product-name">NAME</h3>
+                <p class="product-description">DESCRIPTION</p>
+                <p class="product-price">PRICE</p>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #a8c8d8 0%, #88b8c8 100%);">👜</div>
+                <h3 class="product-name">NAME</h3>
+                <p class="product-description">DESCRIPTION</p>
+                <p class="product-price">PRICE</p>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #d8e8c8 0%, #c8d8a8 100%);">🎒</div>
+                <h3 class="product-name">NAME</h3>
+                <p class="product-description">DESCRIPTION</p>
+                <p class="product-price">PRICE</p>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(135deg, #e8d8c8 0%, #d8c8a8 100%);">👛</div>
+                <h3 class="product-name">NAME</h3>
+                <p class="product-description">DESCRIPTION</p>
+                <p class="product-price">PRICE</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="features-title">Features of the Product</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>LIGHTWEIGHT</h3>
+            </div>
+            <div class="feature-item">
+                <h3>FUNCTIONAL</h3>
+            </div>
+            <div class="feature-item">
+                <h3>VERSATILE</h3>
+            </div>
+        </div>
+        <p class="feature-description">DESCRIPTION</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="categories-sidebar">
+            <h2 class="categories-title">CATEGORIES</h2>
+            <div class="categories-list">
+                <p class="category-text">DESCRIPTION/LIST</p>
+                <span class="category-arrow">◀</span>
+            </div>
+        </div>
+        <div class="categories-images">
+            <div class="category-image">🧺</div>
+            <div class="category-image" style="background: linear-gradient(135deg, #a8c8d8 0%, #88b8c8 100%);">👜</div>
+        </div>
+    </section>
+
+    <!-- Customization Section -->
+    <section class="customization-section">
+        <div class="customization-content">
+            <h2>Customization Option</h2>
+            <p>description</p>
+            <button class="btn-customize">Customize My Sukbit</button>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <h2 class="reviews-title">Reviews</h2>
+        <div class="reviews-carousel">
+            <span class="carousel-arrow">&#60;</span>
+            <div class="review-card">
+                <div class="review-avatar"></div>
+                <h3 class="review-name">name</h3>
+                <div class="review-text">
+                    <div style="width: 100%; height: 3px; background: #3d3d3d; margin-bottom: 10px;"></div>
+                    <div style="width: 100%; height: 3px; background: #3d3d3d;"></div>
+                </div>
+            </div>
+            <span class="carousel-arrow">&#62;</span>
+        </div>
+        <div class="carousel-dots">
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+        </div>
+    </section>
+
+    <!-- Instagram Section -->
+    <section class="instagram-section">
+        <h2 class="instagram-title">Follow us on Instagram</h2>
+        <p class="instagram-handle">@sukbitph</p>
+        <div class="instagram-grid">
+            <div class="instagram-post">🧺</div>
+            <div class="instagram-post" style="background: linear-gradient(135deg, #8b7355 0%, #6b5a45 100%);">👜</div>
+            <div class="instagram-post" style="background: linear-gradient(135deg, #6b5a45 0%, #5a4a35 100%);">🎒</div>
+            <div class="instagram-post" style="background: linear-gradient(135deg, #5a4a35 0%, #4a3a25 100%);">👛</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">
+            <div class="footer-logo-text">SUKBIT</div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Search our Website</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>For inquiries and bulk orders,</p>
+                <p>email us at</p>
+                <p>shop@sukbitph.com</p>
+                <p style="margin-top: 15px;">Phone Number:</p>
+                <p>(63) 09123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Payment Options</h4>
+                <ul>
+                    <li>Gcash</li>
+                    <li>BDO</li>
+                    <li>BPI</li>
+                    <li>VISA CARD</li>
+                    <li>MASTERCARD</li>
+                    <li>PAYPAL</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Visit Us</h4>
+                <p>Philippines at ...</p>
+                <h4 style="margin-top: 25px;">Subscribe to our emails</h4>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email">
+                    <button type="submit">→</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
